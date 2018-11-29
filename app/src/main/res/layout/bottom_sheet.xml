@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:orientation="vertical"
+    >
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:padding="15dp"
+        android:textStyle="bold"
+        android:singleLine="true"
+        android:text="查询方式"
+        android:textColor="@color/black"
+        android:textSize="15sp"/>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"/>
+    <View
+        style="@style/item_cut_line"></View>
+    <TextView
+        android:layout_width="match_parent"
+        android:textSize="15sp"
+        android:id="@+id/sure"
+        android:singleLine="true"
+        android:text="关闭"
+        android:padding="15dp"
+        android:gravity="center"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        android:background="@color/qq_red"
+        android:layout_height="wrap_content" />
+
+</LinearLayout>
+
+

@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">xiaolongbaomanage</string>
+    <string name="cannot_connected_server">cannot_connected_server</string>
+    <string name="server_internal_error">server_internal_error</string>
+    <string name="tab_home">订单</string>
+    <string name="tab_search">搜索</string>
+    <string name="tab_my">我的</string>
+    <string name="back_pressed_tip">再次点击退出</string>
 </resources>
