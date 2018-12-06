@@ -2,52 +2,39 @@ package wocap.neusoft.com.xiaolongbaomanage.activity;
 
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.v4.app.FragmentTransaction;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
+import android.widget.TabHost;
+import android.widget.TabWidget;
 import android.widget.TextView;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
 import wocap.neusoft.com.xiaolongbaomanage.R;
 import wocap.neusoft.com.xiaolongbaomanage.fragment.HomeFragment;
 import wocap.neusoft.com.xiaolongbaomanage.fragment.MyFragment;
 import wocap.neusoft.com.xiaolongbaomanage.fragment.SearchFragment;
-import wocap.neusoft.com.xiaolongbaomanage.util.SnackBarUtil;
 
 public class MainActivity extends BaseActivity {
 
 
-    @BindView(R.id.main_fragment_container)
-    FrameLayout mainFragmentContainer;
-    @BindView(R.id.main_home_icon)
-    ImageView mainHomeIcon;
-    @BindView(R.id.main_home)
-    TextView mainHome;
-    @BindView(R.id.home_home)
-    LinearLayout homeHome;
-    @BindView(R.id.main_search_icon)
-    ImageView mainSearchIcon;
-    @BindView(R.id.main_search)
-    TextView mainSearch;
-    @BindView(R.id.home_search)
-    LinearLayout homeSearch;
-    @BindView(R.id.main_my_icon)
-    ImageView mainMyIcon;
-    @BindView(R.id.main_my)
-    TextView mainMy;
-    @BindView(R.id.home_my)
-    LinearLayout homeMy;
+    @BindView(android.R.id.tabcontent)
+    FrameLayout tabcontent;
+    @BindView(R.id.real_content)
+    FrameLayout realContent;
+    @BindView(android.R.id.tabs)
+    TabWidget tabs;
     @BindView(R.id.main_layout)
-    LinearLayout mainLayout;
+    wocap.neusoft.com.xiaolongbaomanage.customeView.FragmentTabHost tabHost;
     private HomeFragment homeFragment;
     private SearchFragment searchFragment;
     private MyFragment myFragment;
-
+    protected Class[] classTab = {HomeFragment.class, SearchFragment.class, MyFragment.class};
+    protected int[] ids = {R.drawable.tab_menu_home_icon, R.drawable.tab_menu_search_icon, R.drawable.tab_menu_my_icon};
     private boolean isBackPressed;
+    String[] tabTag, tabTitle;
+    TextView txt_count;
 
     @Override
     protected int initLayoutId() {
@@ -56,56 +43,44 @@ public class MainActivity extends BaseActivity {
 
     @Override
     protected void initView() {
+        tabTag = getResources().getStringArray(R.array.tabTag);
+        tabTitle = getResources().getStringArray(R.array.tabTitle);
+        tabHost.setup(this, getSupportFragmentManager(), R.id.real_content);
+        for (int i = 0; i < tabTag.length; i++) {
+            TabHost.TabSpec tabSpec = tabHost.newTabSpec(tabTag[i]);
+            tabSpec.setIndicator(buildIndicator(i));
+            tabHost.addTab(tabSpec, classTab[i], null);
+        }
+        tabHost.setCurrentTab(0);
+        tabHost.setOnTabChangedListener(new TabHost.OnTabChangeListener() {
+            @Override
+            public void onTabChanged(String s) {
 
+            }
+        });
     }
+
+        protected View buildIndicator(int position) {
+        View view = layoutInflater.inflate(R.layout.tab_indicator, null);
+        ImageView imageView = (ImageView) view.findViewById(R.id.icon_tab);
+        TextView textView = (TextView) view.findViewById(R.id.text_indicator);
+        if (position == 1) {
+            txt_count = (TextView) view.findViewById(R.id.txt_count);
+        }
+        imageView.setImageResource(ids[position]);
+        textView.setText(tabTitle[position]);
+        return view;
+    }
+
 
     @Override
     protected void initData() {
 
     }
 
-    @OnClick({R.id.home_home, R.id.home_search, R.id.home_my})
-    public void onClickEdit(View v) {
-        switch (v.getId()) {
-            case R.id.home_home:
-                setSelected();
-                mainHome.setSelected(true);
-                mainHomeIcon.setSelected(true);
-                homeFragment = new HomeFragment();
-                replaceFragment(homeFragment, "home");
-                break;
-            case R.id.home_search:
-                setSelected();
-                mainSearch.setSelected(true);
-                mainSearchIcon.setSelected(true);
-                searchFragment = new SearchFragment();
-                replaceFragment(searchFragment, "search");
-                break;
-            case R.id.home_my:
-                setSelected();
-                mainMy.setSelected(true);
-                mainMyIcon.setSelected(true);
-                myFragment = new MyFragment();
-                replaceFragment(myFragment, "order");
-                break;
-        }
-    }
 
-    private void replaceFragment(BaseFragment fragment, String tag) {
-        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        transaction.replace(R.id.main_fragment_container, fragment, tag);
-        transaction.commit();
-    }
 
-    //重置所有文本的选中状态
-    private void setSelected() {
-        mainHome.setSelected(false);
-        mainHomeIcon.setSelected(false);
-        mainSearchIcon.setSelected(false);
-        mainSearch.setSelected(false);
-        mainMyIcon.setSelected(false);
-        mainMy.setSelected(false);
-    }
+
     @Override
     public void onBackPressed() {
         if (isBackPressed) {
@@ -115,7 +90,6 @@ public class MainActivity extends BaseActivity {
 
         isBackPressed = true;
 
-        SnackBarUtil.show(mainFragmentContainer, R.string.back_pressed_tip);
 
         new Handler().postDelayed(new Runnable() {
             @Override
@@ -124,5 +98,6 @@ public class MainActivity extends BaseActivity {
             }
         }, 2000);
     }
+
 
 }

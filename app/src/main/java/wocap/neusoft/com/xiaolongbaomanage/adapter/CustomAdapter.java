@@ -11,6 +11,8 @@ import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
+import wocap.neusoft.com.xiaolongbaomanage.R;
+
 /**
  * Created by neusoft on 2016/4/29.
  */

@@ -5,13 +5,15 @@ import android.content.Intent;
 
 import com.orhanobut.logger.Logger;
 
+import java.util.ArrayList;
+
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 import rx.subscriptions.CompositeSubscription;
 import wocap.neusoft.com.xiaolongbaomanage.bean.BaseResponse;
-import wocap.neusoft.com.xiaolongbaomanage.bean.LoginBean;
-import wocap.neusoft.com.xiaolongbaomanage.bean.Reslogin;
-import wocap.neusoft.com.xiaolongbaomanage.bean.UpdateOrder;
+import wocap.neusoft.com.xiaolongbaomanage.bean.GetOrder;
+import wocap.neusoft.com.xiaolongbaomanage.bean.ResGetOrder;
+import wocap.neusoft.com.xiaolongbaomanage.bean.ResSearchOrder;
 import wocap.neusoft.com.xiaolongbaomanage.http.BaseSubscriber;
 import wocap.neusoft.com.xiaolongbaomanage.manage.DataManager;
 import wocap.neusoft.com.xiaolongbaomanage.presenter.pView.BaseView;
@@ -22,14 +24,14 @@ import wocap.neusoft.com.xiaolongbaomanage.presenter.pView.NormalView;
  * you can contact me with wangmian1994@outlook.com
  */
 
-public class updateOrderPresenter implements Presenter {
+public class getOrderPresenter implements Presenter {
     private DataManager manager;
     private CompositeSubscription mCompositeSubscription;
     private Context mContext;
-    private NormalView<BaseResponse> resultView;
-    private BaseResponse result;
+    private NormalView<BaseResponse<ResGetOrder>> resultView;
+    private BaseResponse<ResGetOrder> result;
 
-    public updateOrderPresenter(Context mContext) {
+    public getOrderPresenter(Context mContext) {
         this.mContext = mContext;
     }
 
@@ -59,7 +61,7 @@ public class updateOrderPresenter implements Presenter {
 
     @Override
     public void attachView(BaseView view) {
-        resultView = (NormalView<BaseResponse>) view;
+        resultView = (NormalView<BaseResponse<ResGetOrder>>) view;
     }
     @Override
     public void attachIncomingIntent(Intent intent) {
@@ -67,15 +69,15 @@ public class updateOrderPresenter implements Presenter {
     }
 
 
-    public void update(UpdateOrder order) {
+    public void getOrder(GetOrder order) {
         onStart();
-        mCompositeSubscription.add(manager.update(order)
+        mCompositeSubscription.add(manager.getOrder(order)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new BaseSubscriber<BaseResponse>(mContext) {
+                .subscribe(new BaseSubscriber<BaseResponse<ResGetOrder>>(mContext) {
                     @Override
                     public void onCompleted() {
-                        if (resultView != null) {
+                        if (resultView != null ) {
                             resultView.onSuccess(result);
                             Logger.w("oncomplete");
                         }
@@ -89,7 +91,7 @@ public class updateOrderPresenter implements Presenter {
                     }
 
                     @Override
-                    public void onNext(BaseResponse book) {
+                    public void onNext(BaseResponse<ResGetOrder> book) {
                         result = book;
                     }
                 })

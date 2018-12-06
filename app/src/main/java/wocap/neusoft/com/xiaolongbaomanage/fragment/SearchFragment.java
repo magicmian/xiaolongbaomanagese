@@ -7,7 +7,7 @@ import wocap.neusoft.com.xiaolongbaomanage.activity.BaseFragment;
  * @author wangmian E-mail:wangmian1994@outlook.com
  * @version 创建时间：2018/11/29 下午12:31
  */
-public class SearchFragment extends BaseFragment {
+public class 涩arcSearchFragment extends BaseFragment {
     @Override
     protected int initLayoutId() {
         return R.layout.layout_search_fragment;

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#00acff</color><!-- app应用主题颜色，统一的绿色 -->
+    <color name="colorPrimary">#12c700</color><!-- app应用主题颜色，统一的绿色 -->
     <!--<color name="colorPrimaryDark">#428220</color>-->
     <color name="colorPrimaryDark">#000000</color>
     <color name="colorAccent">#2f4f4f</color>

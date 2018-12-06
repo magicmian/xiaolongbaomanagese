@@ -18,7 +18,6 @@ import android.widget.RadioGroup;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
-import com.neusoft.preaccept.ui.view.spinnerPopUpWindow.SpinnerTextView;
 
 /**
  * Created by neusoft on 2016/4/29.

@@ -1,10 +1,13 @@
 package wocap.neusoft.com.xiaolongbaomanage.bean;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 /**
  * @author wangmian E-mail:wangmian1994@outlook.com
  * @version 创建时间：2018/11/27 下午2:38
  */
-public class ContactsBean {
+public class ContactsBean implements Parcelable {
     /**
      * createTime : 1536291157000
      * id : 31
@@ -138,4 +141,57 @@ public class ContactsBean {
     public void setUserTyp(int userTyp) {
         this.userTyp = userTyp;
     }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeLong(this.createTime);
+        dest.writeInt(this.id);
+        dest.writeString(this.idNumber);
+        dest.writeInt(this.idType);
+        dest.writeString(this.name);
+        dest.writeString(this.schoolEndStation);
+        dest.writeString(this.schoolId);
+        dest.writeString(this.schoolName);
+        dest.writeString(this.schoolStartStation);
+        dest.writeString(this.schoolTime);
+        dest.writeLong(this.updateTime);
+        dest.writeInt(this.userId);
+        dest.writeInt(this.userTyp);
+    }
+
+    public ContactsBean() {
+    }
+
+    protected ContactsBean(Parcel in) {
+        this.createTime = in.readLong();
+        this.id = in.readInt();
+        this.idNumber = in.readString();
+        this.idType = in.readInt();
+        this.name = in.readString();
+        this.schoolEndStation = in.readString();
+        this.schoolId = in.readString();
+        this.schoolName = in.readString();
+        this.schoolStartStation = in.readString();
+        this.schoolTime = in.readString();
+        this.updateTime = in.readLong();
+        this.userId = in.readInt();
+        this.userTyp = in.readInt();
+    }
+
+    public static final Creator<ContactsBean> CREATOR = new Creator<ContactsBean>() {
+        @Override
+        public ContactsBean createFromParcel(Parcel source) {
+            return new ContactsBean(source);
+        }
+
+        @Override
+        public ContactsBean[] newArray(int size) {
+            return new ContactsBean[size];
+        }
+    };
 }

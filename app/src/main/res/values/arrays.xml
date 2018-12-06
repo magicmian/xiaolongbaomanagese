@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="tabTitle">
+        <item>@string/tab_home</item>
+        <item>@string/tab_search</item>
+        <item>@string/tab_my</item>
+    </string-array>
+
+    <string-array name="tabTag">
+        <item>home</item>
+        <item>search</item>
+        <item>my</item>
+    </string-array>
+</resources>

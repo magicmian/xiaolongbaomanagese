@@ -3,6 +3,7 @@ package wocap.neusoft.com.xiaolongbaomanage.manage;
 import android.content.Context;
 
 
+import java.util.ArrayList;
 
 import rx.Observable;
 import wocap.neusoft.com.xiaolongbaomanage.api.xiaolongbaoapi;
@@ -10,6 +11,7 @@ import wocap.neusoft.com.xiaolongbaomanage.bean.BaseResponse;
 import wocap.neusoft.com.xiaolongbaomanage.bean.GetOrder;
 import wocap.neusoft.com.xiaolongbaomanage.bean.LoginBean;
 import wocap.neusoft.com.xiaolongbaomanage.bean.ResGetOrder;
+import wocap.neusoft.com.xiaolongbaomanage.bean.ResSearchOrder;
 import wocap.neusoft.com.xiaolongbaomanage.bean.Reslogin;
 import wocap.neusoft.com.xiaolongbaomanage.bean.UpdateOrder;
 
@@ -32,7 +34,7 @@ public class DataManager {
         return xiaolongbaoApi.getOrder(bean);
     }
 
-    public Observable<BaseResponse<ResGetOrder>> searchOrder(GetOrder bean){
+    public Observable<BaseResponse<ArrayList<ResSearchOrder>>> searchOrder(GetOrder bean){
         return xiaolongbaoApi.searchOrder(bean);
     }
     public Observable<BaseResponse> update(UpdateOrder bean){

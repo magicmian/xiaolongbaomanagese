@@ -6,4 +6,6 @@
     <string name="tab_search">搜索</string>
     <string name="tab_my">我的</string>
     <string name="back_pressed_tip">再次点击退出</string>
+    <string name="order_detail">订单详情</string>
+    <string name="change_type">更改订单状态</string>
 </resources>

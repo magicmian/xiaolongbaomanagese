@@ -7,7 +7,7 @@
     <dimen name="toolbar_padding_top">0dp</dimen>
     <dimen name="font_normal">12sp</dimen>
     <dimen name="font_middle">14sp</dimen>
-    <dimen name="font_big">16sp</dimen>
+    <dimen name="font_big">18sp</dimen>
     <dimen name="font_super_big">22sp</dimen>
 
     <dimen name="avatarSize">50dp</dimen>
@@ -62,6 +62,8 @@
     <dimen name="_90dp">90dp</dimen>
     <dimen name="_95dp">95dp</dimen>
     <dimen name="_100dp">100dp</dimen>
+    <dimen name="_120dp">120dp</dimen>
+    <dimen name="_160dp">160dp</dimen>
     <dimen name="_200dp">200dp</dimen>
     <dimen name="_8sp">8sp</dimen>
     <dimen name="_10sp">10sp</dimen>

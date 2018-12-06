@@ -5,14 +5,14 @@ import android.content.Intent;
 
 import com.orhanobut.logger.Logger;
 
+import java.util.ArrayList;
+
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 import rx.subscriptions.CompositeSubscription;
 import wocap.neusoft.com.xiaolongbaomanage.bean.BaseResponse;
 import wocap.neusoft.com.xiaolongbaomanage.bean.GetOrder;
-import wocap.neusoft.com.xiaolongbaomanage.bean.LoginBean;
-import wocap.neusoft.com.xiaolongbaomanage.bean.ResGetOrder;
-import wocap.neusoft.com.xiaolongbaomanage.bean.Reslogin;
+import wocap.neusoft.com.xiaolongbaomanage.bean.ResSearchOrder;
 import wocap.neusoft.com.xiaolongbaomanage.http.BaseSubscriber;
 import wocap.neusoft.com.xiaolongbaomanage.manage.DataManager;
 import wocap.neusoft.com.xiaolongbaomanage.presenter.pView.BaseView;
@@ -27,8 +27,8 @@ public class searchOrderPresenter implements Presenter {
     private DataManager manager;
     private CompositeSubscription mCompositeSubscription;
     private Context mContext;
-    private NormalView<BaseResponse<ResGetOrder>> resultView;
-    private BaseResponse<ResGetOrder> result;
+    private NormalView<BaseResponse<ArrayList<ResSearchOrder>>> resultView;
+    private BaseResponse<ArrayList<ResSearchOrder>> result;
 
     public searchOrderPresenter(Context mContext) {
         this.mContext = mContext;
@@ -60,7 +60,7 @@ public class searchOrderPresenter implements Presenter {
 
     @Override
     public void attachView(BaseView view) {
-        resultView = (NormalView<BaseResponse<ResGetOrder>>) view;
+        resultView = (NormalView<BaseResponse<ArrayList<ResSearchOrder>>>) view;
     }
     @Override
     public void attachIncomingIntent(Intent intent) {
@@ -73,7 +73,7 @@ public class searchOrderPresenter implements Presenter {
         mCompositeSubscription.add(manager.searchOrder(order)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new BaseSubscriber<BaseResponse<ResGetOrder>>(mContext) {
+                .subscribe(new BaseSubscriber<BaseResponse<ArrayList<ResSearchOrder>>>(mContext) {
                     @Override
                     public void onCompleted() {
                         if (resultView != null) {
@@ -90,35 +90,7 @@ public class searchOrderPresenter implements Presenter {
                     }
 
                     @Override
-                    public void onNext(BaseResponse<ResGetOrder> book) {
-                        result = book;
-                    }
-                })
-        );
-    }
-    public void getOrder(GetOrder order) {
-        onStart();
-        mCompositeSubscription.add(manager.getOrder(order)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new BaseSubscriber<BaseResponse<ResGetOrder>>(mContext) {
-                    @Override
-                    public void onCompleted() {
-                        if (resultView != null) {
-                            resultView.onSuccess(result);
-                            Logger.w("oncomplete");
-                        }
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-                        e.printStackTrace();
-                        resultView.onError("请求失败！！");
-                        Logger.w("onerror");
-                    }
-
-                    @Override
-                    public void onNext(BaseResponse<ResGetOrder> book) {
+                    public void onNext(BaseResponse<ArrayList<ResSearchOrder>> book) {
                         result = book;
                     }
                 })

@@ -62,7 +62,7 @@ public class BottomSheetDialog extends AppCompatDialog {
     }
 
     private View wrapInBottomSheet(int layoutResId, View view, ViewGroup.LayoutParams params) {
-        final CoordinatorLayout coordinator = (CoordinatorLayout) View.inflate(getContext(),
+        final FrameLayout coordinator = (FrameLayout) View.inflate(getContext(),
                 android.support.design.R.layout.design_bottom_sheet_dialog, null);
         if (layoutResId != 0 && view == null) {
             view = getLayoutInflater().inflate(layoutResId, coordinator, false);

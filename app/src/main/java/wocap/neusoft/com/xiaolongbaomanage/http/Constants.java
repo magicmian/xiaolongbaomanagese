@@ -26,63 +26,244 @@ public class Constants {
     public static String DOUBAN_PASS = "DOUBAN_PASS";
     public static String BASE_URL = "http://m.xiaolongbaotech.cn/" ;
 
-    public static final String SUFFIX_AAC = ".aac";
-    public static final String SUFFIX_MP3 = ".mp3";
-    public static final String SUFFIX_JPG = ".jpg";
-    public static final String SUFFIX_WEBP = ".webp";
-    public static final String SUFFIX_PNG = ".png";
-    public static final String SUFFIX_WEBJ = ".jpg";
-    public static final String SUFFIX_WAV = ".wav";
-    public static final String SUFFIX_AMR = ".amr";
-    public static final String SUFFIX_MP4 = ".mp4";
-    public static final String SUFFIX_MOV = ".mov";
+    public enum CUstomerType{
+        ADULT(1,"成人"),
+        STUDENT(2,"学生"),
+        CHLDREN(3,"儿童");
 
-    public static final String WAV = "wav";
-    public static final String MP3 = "mp3";
-    public static final String MP4 = "mp4";
-    public static final String MOV = "mov";
+        private int code;
+        private String value;
 
+        CUstomerType(int code, String value) {
+            this.code = code;
+            this.value = value;
+        }
 
+        public String getValue() {
+            return value;
+        }
 
-    //主页面的根路径
-    public static String BASE_HOME_URL= "http://60.205.189.201/douban/";
+        public void setValue(String value) {
+            this.value = value;
+        }
 
-    public static String VIDEO_EXANPLE = "http://baobab.wdjcdn.com/14564977406580.mp4";
-    public static String VIDEO_CACHE = "http://111.198.24.133:83/yyy_login_server/pic/YB059284/97778276040859/1.mp4";
-    public static String VIDEO_EXANPLE1 = "http://video.yijiaoxing.com/xixihahahhahaxixi";
-    public static String VIDEO_URL = "http://47.89.42.150:8781/";
-    public static final String NEW_FRIENDS_USERNAME = "item_new_friends";
-    public static final String GROUP_USERNAME = "item_groups";
-    public static final String CHAT_ROOM = "item_chatroom";
-    public static final String ACCOUNT_REMOVED = "account_removed";
-    public static final String ACCOUNT_CONFLICT = "conflict";
-    public static final String ACCOUNT_FORBIDDEN = "user_forbidden";
-    public static final String CHAT_ROBOT = "item_robots";
-    public static final String MESSAGE_ATTR_ROBOT_MSGTYPE = "msgtype";
-    public static final String ACTION_GROUP_CHANAGED = "action_group_changed";
-    public static final String ACTION_CONTACT_CHANAGED = "action_contact_changed";
+        public int getCode() {
+            return code;
+        }
 
-    //环信所需要的一些数据
-    public static final String MESSAGE_ATTR_IS_VOICE_CALL = "is_voice_call";
-    public static final String MESSAGE_ATTR_IS_VIDEO_CALL = "is_video_call";
+        public void setCode(int code) {
+            this.code = code;
+        }
 
-    public static final String MESSAGE_ATTR_IS_BIG_EXPRESSION = "em_is_big_expression";
-    public static final String MESSAGE_ATTR_EXPRESSION_ID = "em_expression_id";
-
-    public static final String MESSAGE_ATTR_AT_MSG = "em_at_list";
-    public static final String MESSAGE_ATTR_VALUE_AT_MSG_ALL = "ALL";
-
-    public static final String PAY_LOAD = "wangmian";
+        public static CUstomerType codeOf(int code){
+            for(CUstomerType orderStatusEnum : values()){
+                if(orderStatusEnum.getCode() == code){
+                    return orderStatusEnum;
+                }
+            }
+            throw new RuntimeException("么有找到对应的枚举");
+        }
+    }
 
 
+    public enum CardTypeEnum{
+        ERDAI(1,"二代身份证"),
+        GAOAO(2,"港澳通行证"),
+        TAIWAN(3,"台湾通行证"),
+        HUZHAO(4,"护照");
 
-    public static final int CHATTYPE_SINGLE = 1;
-    public static final int CHATTYPE_GROUP = 2;
-    public static final int CHATTYPE_CHATROOM = 3;
+        private int code;
+        private String value;
 
-    public static final String EXTRA_CHAT_TYPE = "chatType";
-    public static final String EXTRA_USER_ID = "userId";
-    public final static String EXTRA_SHOW_GIF = "SHOW_GIF";
-    public final static String EXTRA_SHOW_VIDEO = "EXTRA_SHOW_VIDEO";
-    public final static String EXTRA_IS_ACTIVITY = "isActivity";
+        CardTypeEnum(int code, String value) {
+            this.code = code;
+            this.value = value;
+        }
+
+        public int getCode() {
+            return code;
+        }
+
+        public void setCode(int code) {
+            this.code = code;
+        }
+
+        public String getValue() {
+            return value;
+        }
+
+        public void setValue(String value) {
+            this.value = value;
+        }
+
+        public static CardTypeEnum codeOf(int code){
+            for(CardTypeEnum orderStatusEnum : values()){
+                if(orderStatusEnum.getCode() == code){
+                    return orderStatusEnum;
+                }
+            }
+            throw new RuntimeException("么有找到对应的枚举");
+        }
+    }
+
+
+    public enum SeatEnum{
+        BUSSINESSSEAT(0,"商务特等座"),
+        FIRSTRATESEAT(10,"一等座"),
+        SECONDRATESEAT(20,"二等座"),
+        TOPSOFTSLEEP(30,"高级软卧"),
+        SOFTSLEEP(40,"软卧"),
+        DSOFTSLEEP(50,"动卧"),
+        TOUGHSLEEP(60,"硬卧"),
+        SOFTSEAT(70,"软座"),
+        TOUGHSEAT(80,"硬座"),
+        NOSEAT(90,"无座")
+        ;
+
+        SeatEnum(int code ,String value) {
+            this.value = value;
+            this.code = code;
+        }
+
+        private String value;
+        private int code;
+
+        public String getValue() {
+            return value;
+        }
+
+        public void setValue(String value) {
+            this.value = value;
+        }
+
+        public int getCode() {
+            return code;
+        }
+
+        public void setCode(int code) {
+            this.code = code;
+        }
+        public static SeatEnum codeOf(int code){
+            for(SeatEnum orderStatusEnum : values()){
+                if(orderStatusEnum.getCode() == code){
+                    return orderStatusEnum;
+                }
+            }
+            throw new RuntimeException("么有找到对应的枚举");
+        }
+
+    }
+
+
+    public enum OrderStatusEnum{
+        CANCELED(0,"已取消"),
+        NO_PAY(10,"未处理"),
+        PAID(20,"刷票中"),
+        SHIPPED(40,"已出票"),
+        ORDER_SUCCESS(50,"交易成功"),
+        ORDER_CLOSE(60,"交易关闭");
+
+
+        OrderStatusEnum(int code,String value){
+            this.code = code;
+            this.value = value;
+        }
+        private String value;
+        private int code;
+
+        public String getValue() {
+            return value;
+        }
+
+        public int getCode() {
+            return code;
+        }
+
+        public static OrderStatusEnum codeOf(int code){
+            for(OrderStatusEnum orderStatusEnum : values()){
+                if(orderStatusEnum.getCode() == code){
+                    return orderStatusEnum;
+                }
+            }
+            throw new RuntimeException("么有找到对应的枚举");
+        }
+    }
+    public interface  AlipayCallback{
+        String TRADE_STATUS_WAIT_BUYER_PAY = "WAIT_BUYER_PAY";
+        String TRADE_STATUS_TRADE_SUCCESS = "TRADE_SUCCESS";
+
+        String RESPONSE_SUCCESS = "success";
+        String RESPONSE_FAILED = "failed";
+    }
+
+
+
+    public enum PayPlatformEnum{
+        ALIPAY(1,"支付宝");
+
+        PayPlatformEnum(int code,String value){
+            this.code = code;
+            this.value = value;
+        }
+        private String value;
+        private int code;
+
+        public String getValue() {
+            return value;
+        }
+
+        public int getCode() {
+            return code;
+        }
+    }
+
+    public enum ifUseUserAccount{
+        USE(0,"使用客户自己的账号"),
+        NOUSE(1,"不适用客户的账号");
+
+        ifUseUserAccount(int code,String value){
+            this.code = code;
+            this.value = value;
+        }
+        private String value;
+        private int code;
+
+        public String getValue() {
+            return value;
+        }
+
+        public int getCode() {
+            return code;
+        }
+    }
+
+    public enum PaymentTypeEnum{
+        ONLINE_PAY(1,"在线支付");
+
+        PaymentTypeEnum(int code,String value){
+            this.code = code;
+            this.value = value;
+        }
+        private String value;
+        private int code;
+
+        public String getValue() {
+            return value;
+        }
+
+        public int getCode() {
+            return code;
+        }
+
+
+        public static PaymentTypeEnum codeOf(int code){
+            for(PaymentTypeEnum paymentTypeEnum : values()){
+                if(paymentTypeEnum.getCode() == code){
+                    return paymentTypeEnum;
+                }
+            }
+            throw new RuntimeException("么有找到对应的枚举");
+        }
+
+    }
 }

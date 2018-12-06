@@ -1,14 +1,15 @@
 package wocap.neusoft.com.xiaolongbaomanage.api;
 
+import java.util.ArrayList;
+
 import retrofit2.http.Body;
-import retrofit2.http.GET;
 import retrofit2.http.POST;
-import retrofit2.http.Path;
 import rx.Observable;
 import wocap.neusoft.com.xiaolongbaomanage.bean.BaseResponse;
 import wocap.neusoft.com.xiaolongbaomanage.bean.GetOrder;
 import wocap.neusoft.com.xiaolongbaomanage.bean.LoginBean;
 import wocap.neusoft.com.xiaolongbaomanage.bean.ResGetOrder;
+import wocap.neusoft.com.xiaolongbaomanage.bean.ResSearchOrder;
 import wocap.neusoft.com.xiaolongbaomanage.bean.Reslogin;
 import wocap.neusoft.com.xiaolongbaomanage.bean.UpdateOrder;
 
@@ -29,21 +30,21 @@ public interface xiaolongbaoapi {
      * 获取订单
      * @return
      */
-    @POST("mmanage/order/get_order.do")
+    @POST("manage/order/get_order.do")
     Observable<BaseResponse<ResGetOrder>> getOrder(@Body GetOrder getOrder);
 
     /**
      * 查找订单
      * @return
      */
-    @POST("mmanage/order/search_order.do")
-    Observable<BaseResponse<ResGetOrder>> searchOrder(@Body GetOrder getOrder);
+    @POST("manage/order/search_order.do")
+    Observable<BaseResponse<ArrayList<ResSearchOrder>>> searchOrder(@Body GetOrder getOrder);
 
 
     /**
      * 更新订单状态
      * @return
      */
-    @POST("mmanage/order/update_order.do")
+    @POST("manage/order/update_order.do")
     Observable<BaseResponse> updateOrder(@Body UpdateOrder getOrder);
 }
