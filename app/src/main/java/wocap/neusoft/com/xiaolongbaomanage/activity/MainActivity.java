@@ -1,6 +1,5 @@
 package wocap.neusoft.com.xiaolongbaomanage.activity;
 
-import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
 import android.widget.FrameLayout;
@@ -10,7 +9,6 @@ import android.widget.TabWidget;
 import android.widget.TextView;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import wocap.neusoft.com.xiaolongbaomanage.R;
 import wocap.neusoft.com.xiaolongbaomanage.fragment.HomeFragment;
 import wocap.neusoft.com.xiaolongbaomanage.fragment.MyFragment;

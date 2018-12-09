@@ -8,6 +8,7 @@ import rx.Observable;
 import wocap.neusoft.com.xiaolongbaomanage.bean.BaseResponse;
 import wocap.neusoft.com.xiaolongbaomanage.bean.GetOrder;
 import wocap.neusoft.com.xiaolongbaomanage.bean.LoginBean;
+import wocap.neusoft.com.xiaolongbaomanage.bean.PushTitle;
 import wocap.neusoft.com.xiaolongbaomanage.bean.ResGetOrder;
 import wocap.neusoft.com.xiaolongbaomanage.bean.ResSearchOrder;
 import wocap.neusoft.com.xiaolongbaomanage.bean.Reslogin;
@@ -25,14 +26,12 @@ public interface xiaolongbaoapi {
      */
     @POST("manage/user/login.do")
     Observable<BaseResponse<Reslogin>> login(@Body LoginBean bean);
-
     /**
      * 获取订单
      * @return
      */
     @POST("manage/order/get_order.do")
     Observable<BaseResponse<ResGetOrder>> getOrder(@Body GetOrder getOrder);
-
     /**
      * 查找订单
      * @return
@@ -40,11 +39,15 @@ public interface xiaolongbaoapi {
     @POST("manage/order/search_order.do")
     Observable<BaseResponse<ArrayList<ResSearchOrder>>> searchOrder(@Body GetOrder getOrder);
 
-
     /**
      * 更新订单状态
      * @return
      */
     @POST("manage/order/update_order.do")
     Observable<BaseResponse> updateOrder(@Body UpdateOrder getOrder);
+
+
+    @POST("info/save_float_title.do")
+    Observable<BaseResponse> pushInfo(@Body PushTitle pushTitle);
+
 }

@@ -6,6 +6,11 @@ import com.orhanobut.logger.Logger;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
+
+import java.util.HashSet;
+import java.util.Set;
+
+import cn.jpush.android.api.JPushInterface;
 import wocap.neusoft.com.xiaolongbaomanage.event.CanInitEvent;
 import wocap.neusoft.com.xiaolongbaomanage.event.CanStartApp;
 
@@ -17,6 +22,8 @@ public class MainApp extends Application {
     private static MainApp mInstance;
 
     private static Context context = null;
+
+    private Set<String> tags = new HashSet<>();
 
     public static MainApp getInstance() {
         return mInstance;
@@ -44,11 +51,16 @@ public class MainApp extends Application {
     private void init() {
         mInstance = this;
         context = getApplicationContext();
+        JPushInterface.setDebugMode(true);
+        JPushInterface.init(this);
+        tags.add("admin");
+        JPushInterface.setTags(getApplicationContext(),1,tags);
         Logger.init("xiaolongbao")
                 .methodCount(3)
                 .hideThreadInfo();
         //初始化音乐加载
         EventBus.getDefault().post(new CanStartApp());
+
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)

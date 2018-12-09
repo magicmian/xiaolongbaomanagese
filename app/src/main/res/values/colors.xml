@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#12c700</color><!-- app应用主题颜色，统一的绿色 -->
+    <color name="colorPrimary">#14b783</color><!-- app应用主题颜色，统一的绿色 -->
     <!--<color name="colorPrimaryDark">#428220</color>-->
-    <color name="colorPrimaryDark">#000000</color>
+    <color name="colorPrimaryDark">#0e805b</color>
     <color name="colorAccent">#2f4f4f</color>
     <color name="app_bg">#f2f2f2</color><!-- app应用统一的页面背景灰色 -->
     <color name="white">#ffffff</color>
@@ -13,6 +13,7 @@
     <color name="line_color_plus">#e5e5e5</color>
     <color name="home_bottom">#777777</color>
     <color name="app_font_color">#333333</color><!-- app应用统一的字体 -->
+    <color name="app_do_color">#ff8600</color>
     <color name="main_tab_color">#fafafa</color>
     <color name="thumb_background">#394551</color>
     <color name="toolbar_old_back">#F0F0F0</color>

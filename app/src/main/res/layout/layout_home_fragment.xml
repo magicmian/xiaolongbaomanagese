@@ -3,11 +3,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@color/app_bg"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        android:background="@color/colorPrimary"
+        android:background="@color/white"
+        android:elevation="@dimen/_5dp"
         android:layout_height="?attr/actionBarSize"
         >
 
@@ -23,7 +25,7 @@
                 android:gravity="center_vertical"
                 android:layout_marginLeft="20dp"
                 android:textStyle="bold"
-                android:textColor="@color/white"
+                android:textColor="@color/black"
                 android:id="@+id/select_time"
                 android:textSize="@dimen/font_big" />
             <TextView
@@ -31,21 +33,49 @@
                 android:layout_height="match_parent"
                 android:layout_marginLeft="20dp"
                 android:gravity="center_vertical"
-                android:layout_toEndOf="@+id/select_time"
+                android:layout_toLeftOf="@+id/select_typpe_img"
                 android:text="选择状态"
                 android:textStyle="bold"
-                android:textColor="@color/white"
+                android:layout_marginRight="@dimen/_10dp"
+                android:textColor="@color/black"
                 android:id="@+id/select_type"
                 android:textSize="@dimen/font_big" />
+            <FrameLayout
+                android:layout_width="@dimen/_50dp"
+                android:id="@+id/select_typpe_img"
+                android:layout_alignParentEnd="true"
+                android:layout_centerInParent="true"
+                android:layout_height="match_parent">
+                <com.nightonke.boommenu.BoomMenuButton
+                    android:id="@+id/bmb"
+                    android:layout_width="24dp"
+                    android:layout_gravity="center"
+                    android:layout_height="24dp"
+                    app:bmb_buttonEnum="ham"
+                    app:bmb_piecePlaceEnum="piecePlace_ham_5"
+                    app:bmb_buttonPlaceEnum="buttonPlace_ham_5"
+                    />
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:clickable="false"
+                    android:focusableInTouchMode="false"
+                    android:src="@drawable/ic_list"/>
+            </FrameLayout>
+
+
 
         </RelativeLayout>
 
     </android.support.v7.widget.Toolbar>
+
     <in.srain.cube.views.ptr.PtrClassicFrameLayout
         android:id="@+id/ptr_classic_frame_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="#FFFFFF"
+        android:layout_marginTop="@dimen/_5dp"
         app:ptr_duration_to_back_refresh="200"
         app:ptr_duration_to_close_footer="1000"
         app:ptr_duration_to_close_header="1000"

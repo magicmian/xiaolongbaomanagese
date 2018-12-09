@@ -10,6 +10,7 @@ import wocap.neusoft.com.xiaolongbaomanage.api.xiaolongbaoapi;
 import wocap.neusoft.com.xiaolongbaomanage.bean.BaseResponse;
 import wocap.neusoft.com.xiaolongbaomanage.bean.GetOrder;
 import wocap.neusoft.com.xiaolongbaomanage.bean.LoginBean;
+import wocap.neusoft.com.xiaolongbaomanage.bean.PushTitle;
 import wocap.neusoft.com.xiaolongbaomanage.bean.ResGetOrder;
 import wocap.neusoft.com.xiaolongbaomanage.bean.ResSearchOrder;
 import wocap.neusoft.com.xiaolongbaomanage.bean.Reslogin;
@@ -39,5 +40,9 @@ public class DataManager {
     }
     public Observable<BaseResponse> update(UpdateOrder bean){
         return xiaolongbaoApi.updateOrder(bean);
+    }
+
+    public Observable<BaseResponse> pushtitle(PushTitle bean){
+        return xiaolongbaoApi.pushInfo(bean);
     }
 }

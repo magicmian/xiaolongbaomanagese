@@ -15,6 +15,10 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.nightonke.boommenu.BoomButtons.HamButton;
+import com.nightonke.boommenu.BoomButtons.OnBMClickListener;
+import com.nightonke.boommenu.BoomMenuButton;
+
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
@@ -66,6 +70,8 @@ public class OrderDetailActivity extends BaseActivity {
     TextView remark;
     @BindView(R.id.copy)
     ImageView copy;
+    @BindView(R.id.bmb)
+    BoomMenuButton bmb;
     private ResSearchOrder order;
     CustomAdapter<ContactsBean> adapter;
     private NormalView<BaseResponse> resultView;
@@ -134,6 +140,7 @@ public class OrderDetailActivity extends BaseActivity {
         updateOrderPresenter = new updateOrderPresenter(OrderDetailActivity.this);
         updateOrderPresenter.attachView(resultView);
         updateOrderPresenter.onCreate();
+        initSelectTypeList();
     }
 
     @Override
@@ -171,10 +178,8 @@ public class OrderDetailActivity extends BaseActivity {
     }
 
 
-
-    @OnClick(R.id.btn_login)
-    public void changeType(){
-        List<BottomItem> list = new ArrayList<>();
+    private void initSelectTypeList() {
+        final List<BottomItem> list = new ArrayList<>();
         final BottomItem bottom1 = new BottomItem();
         bottom1.id = "10";
         bottom1.text = "未处理";
@@ -187,20 +192,38 @@ public class OrderDetailActivity extends BaseActivity {
         BottomItem bottom4 = new BottomItem();
         bottom4.id = "50";
         bottom4.text = "已完成";
+        BottomItem bottom5 = new BottomItem();
+        bottom5.id = "90";
+        bottom5.text = "全部";
         list.add(bottom1);
         list.add(bottom2);
         list.add(bottom3);
         list.add(bottom4);
-        AndroidTool.showBottomForOnCLick(OrderDetailActivity.this, list, "选择类型", new BottomDialog.OnItemClickListener<BottomItem>() {
-            @Override
-            public void onClick(BottomItem bottomItem) {
-                UpdateOrder updateOrder = new UpdateOrder();
-                updateOrder.orderId = order.getId();
-                updateOrder.orderType = order.getOrderType();
-                updateOrder.status = Integer.parseInt(bottomItem.id);
-                updateOrderPresenter.update(updateOrder);
-            }
-        });
+        list.add(bottom5);
+        for (int i = 0; i < bmb.getButtonPlaceEnum().buttonNumber(); i++) {
+            bmb.addBuilder(new HamButton.Builder()
+                    .normalText(list.get(i).text)
+                    .highlightedColorRes(R.color.white)
+                    .normalTextColorRes(R.color.black)
+                    .listener(new OnBMClickListener() {
+                        @Override
+                        public void onBoomButtonClick(int index) {
+                            UpdateOrder updateOrder = new UpdateOrder();
+                            updateOrder.orderId = order.getId();
+                            updateOrder.orderType = order.getOrderType();
+                            updateOrder.status = Integer.parseInt(list.get(index).id);
+                            updateOrderPresenter.update(updateOrder);
+                        }
+                    })
+                    .normalColorRes(R.color.white));
+        }
+    }
+
+
+
+    @OnClick(R.id.btn_login)
+    public void changeType(){
+       bmb.boom();
     }
 
     public void diallPhone(String phoneNum) {

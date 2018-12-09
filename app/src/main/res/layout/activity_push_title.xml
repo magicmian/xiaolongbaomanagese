@@ -1,13 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:orientation="vertical"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    tools:context=".activity.PushTitleActivity">
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        android:background="@color/white"
         android:elevation="@dimen/_5dp"
+        android:background="@color/white"
         android:layout_height="?attr/actionBarSize"
         >
 
@@ -22,35 +25,32 @@
                 android:layout_height="match_parent"
                 android:layout_centerInParent="true"
                 android:gravity="center"
-                android:text="@string/tab_my"
+                android:text="@string/push_title"
                 android:textStyle="bold"
                 android:textColor="@color/black"
                 android:textSize="@dimen/font_big" />
 
 
-
+            <ImageView
+                android:id="@+id/iv_setting"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:paddingRight="10dp"
+                android:src="@drawable/ic_send" />
         </RelativeLayout>
 
     </android.support.v7.widget.Toolbar>
-
-    <RelativeLayout
-        android:id="@+id/rl_push_title"
-        android:layout_marginTop="@dimen/_10dp"
+    <EditText
+        android:id="@+id/edt_feedback_content"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/white"
-        android:padding="@dimen/_15dp">
-
-        <TextView
-            style="@style/app_text_style"
-            android:layout_alignParentStart="true"
-            android:text="@string/push_title"/>
-
-        <TextView
-            android:id="@+id/txt_name"
-            style="@style/app_text_style"
-            android:layout_alignParentEnd="true"
-            android:drawableEnd="@drawable/ic_next"
-            android:drawablePadding="@dimen/_10dp"/>
-    </RelativeLayout>
+        android:layout_margin="@dimen/_20dp"
+        android:background="@drawable/input_border_bg"
+        android:gravity="top"
+        android:minLines="4"
+        android:hint="..."
+        android:padding="@dimen/_20dp"
+        android:textSize="@dimen/_13sp"/>
 </LinearLayout>

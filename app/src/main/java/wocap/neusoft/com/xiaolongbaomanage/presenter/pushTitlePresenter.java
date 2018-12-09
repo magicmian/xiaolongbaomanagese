@@ -5,13 +5,15 @@ import android.content.Intent;
 
 import com.orhanobut.logger.Logger;
 
-import rx.Observable;
+import java.util.ArrayList;
+
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 import rx.subscriptions.CompositeSubscription;
 import wocap.neusoft.com.xiaolongbaomanage.bean.BaseResponse;
-import wocap.neusoft.com.xiaolongbaomanage.bean.LoginBean;
-import wocap.neusoft.com.xiaolongbaomanage.bean.Reslogin;
+import wocap.neusoft.com.xiaolongbaomanage.bean.GetOrder;
+import wocap.neusoft.com.xiaolongbaomanage.bean.PushTitle;
+import wocap.neusoft.com.xiaolongbaomanage.bean.ResSearchOrder;
 import wocap.neusoft.com.xiaolongbaomanage.http.BaseSubscriber;
 import wocap.neusoft.com.xiaolongbaomanage.manage.DataManager;
 import wocap.neusoft.com.xiaolongbaomanage.presenter.pView.BaseView;
@@ -22,14 +24,14 @@ import wocap.neusoft.com.xiaolongbaomanage.presenter.pView.NormalView;
  * you can contact me with wangmian1994@outlook.com
  */
 
-public class LoginPresenter implements Presenter {
+public class pushTitlePresenter implements Presenter {
     private DataManager manager;
     private CompositeSubscription mCompositeSubscription;
     private Context mContext;
-    private NormalView<BaseResponse<Reslogin>> resultView;
-    private BaseResponse<Reslogin> result;
+    private NormalView<BaseResponse> resultView;
+    private BaseResponse result;
 
-    public LoginPresenter(Context mContext) {
+    public pushTitlePresenter(Context mContext) {
         this.mContext = mContext;
     }
 
@@ -59,7 +61,7 @@ public class LoginPresenter implements Presenter {
 
     @Override
     public void attachView(BaseView view) {
-        resultView = (NormalView<BaseResponse<Reslogin>>) view;
+        resultView = (NormalView<BaseResponse>) view;
     }
     @Override
     public void attachIncomingIntent(Intent intent) {
@@ -67,20 +69,17 @@ public class LoginPresenter implements Presenter {
     }
 
 
-    public void login() {
+    public void pushtitle(PushTitle order) {
         onStart();
-        LoginBean bean = new LoginBean();
-        bean.phone = "1";
-        bean.password="1";
-        mCompositeSubscription.add(manager.login(bean)
+        mCompositeSubscription.add(manager.pushtitle(order)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new BaseSubscriber<BaseResponse<Reslogin>>(mContext) {
+                .subscribe(new BaseSubscriber<BaseResponse>(mContext) {
                     @Override
                     public void onCompleted() {
                         if (resultView != null) {
                             resultView.onSuccess(result);
-                            Logger.w("登陆成功");
+                            Logger.w("oncomplete");
                         }
                     }
 
@@ -92,7 +91,7 @@ public class LoginPresenter implements Presenter {
                     }
 
                     @Override
-                    public void onNext(BaseResponse<Reslogin> book) {
+                    public void onNext(BaseResponse book) {
                         result = book;
                     }
                 })
