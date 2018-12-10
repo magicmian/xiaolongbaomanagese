@@ -5,7 +5,7 @@
     android:background="@color/white"
     android:layout_margin="@dimen/_5dp"
     android:id="@+id/option"
-    app:cardCornerRadius="@dimen/_1dp"
+    app:cardCornerRadius="@dimen/_5dp"
     android:padding="@dimen/_4dp"
     android:elevation="@dimen/_5dp"
     android:layout_height="wrap_content">
@@ -33,6 +33,7 @@
             android:text="未处理"
             android:textSize="@dimen/font_super_big"
             android:id="@+id/tv_type"
+            android:layout_marginRight="@dimen/_10dp"
             android:textColor="@color/colorPrimary"
             android:layout_height="wrap_content" />
     </RelativeLayout>
@@ -53,6 +54,7 @@
                 android:textColor="@color/black"
                 android:padding="@dimen/_4dp"
                 android:gravity="center"
+                android:layout_marginRight="@dimen/_10dp"
                 android:textSize="@dimen/font_big"
                 android:id="@+id/tv_start_station"
                 android:text="北京"/>
@@ -69,6 +71,7 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:textColor="@color/black"
+                android:layout_marginLeft="@dimen/_10dp"
                 android:id="@+id/tv_end_station"
                 android:padding="@dimen/_4dp"
                 android:textSize="@dimen/font_big"
@@ -105,7 +108,7 @@
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
                 android:layout_alignParentStart="true"
-                app:srcCompat="@drawable/ic_data"/>
+                app:srcCompat="@drawable/ic_customer"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -117,35 +120,5 @@
                 android:text="王冕"/>
         </RelativeLayout>
     </LinearLayout>
-
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_marginTop="@dimen/_120dp"
-        android:layout_height="wrap_content">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:textColor="@color/black"
-            android:layout_marginLeft="@dimen/_10dp"
-            android:padding="@dimen/_4dp"
-            android:textSize="@dimen/font_big"
-            android:drawableLeft="@drawable/ic_phone"
-            android:id="@+id/tv_phone"
-            android:text="17615040413"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@color/black"
-            android:padding="@dimen/_4dp"
-            android:layout_alignParentEnd="true"
-            android:layout_marginLeft="@dimen/_100dp"
-            android:textSize="@dimen/font_big"
-            android:id="@+id/tv_seat"
-            android:text="硬卧"/>
-    </RelativeLayout>
 
 </android.support.v7.widget.CardView>

@@ -80,7 +80,7 @@ public class HomeFragment extends BaseFragment {
     int myear, mmonth, mday;
     private String selecttime;
     private String orderStatus = "10";
-    private SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd");
+    private SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 
     @Override
     protected int initLayoutId() {
@@ -134,7 +134,7 @@ public class HomeFragment extends BaseFragment {
         Paint paint = new Paint();
         paint.setStrokeWidth(2);
         paint.setColor(getResources().getColor(R.color.line_color));
-        recycleView.addItemDecoration(new HorizontalDividerItemDecoration.Builder(getActivity()).margin(0, 0).paint(paint).build());
+        //recycleView.addItemDecoration(new HorizontalDividerItemDecoration.Builder(getActivity()).margin(0, 0).paint(paint).build());
         recycleView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recycleView.setHasFixedSize(true);
         recycleView.setAdapter(adapter);
@@ -151,7 +151,9 @@ public class HomeFragment extends BaseFragment {
              */
             @Override
             public void onLoadMoreBegin(PtrFrameLayout frame) {
+                pageIndex++;
                 getOrder();
+                frame.refreshComplete();
             }
 
             @Override
@@ -188,8 +190,8 @@ public class HomeFragment extends BaseFragment {
                     } else {
                         canLoadMore = true;
                     }
-                    pageIndex++;
                 } else {
+                    adapter.removeAll();
                     AndroidTool.showToast(getActivity(), object.msg);
                 }
 
@@ -236,11 +238,15 @@ public class HomeFragment extends BaseFragment {
         BottomItem bottom5 = new BottomItem();
         bottom5.id = "90";
         bottom5.text = "全部";
+        BottomItem bottom6 = new BottomItem();
+        bottom6.id = "80";
+        bottom6.text = "全部未处理";
         list.add(bottom1);
         list.add(bottom2);
         list.add(bottom3);
         list.add(bottom4);
         list.add(bottom5);
+        list.add(bottom6);
         for (int i = 0; i < bmb.getButtonPlaceEnum().buttonNumber(); i++) {
             bmb.addBuilder(new HamButton.Builder()
                     .normalText(list.get(i).text)

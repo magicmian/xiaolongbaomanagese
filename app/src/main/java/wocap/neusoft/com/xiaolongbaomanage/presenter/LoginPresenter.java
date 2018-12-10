@@ -70,8 +70,8 @@ public class LoginPresenter implements Presenter {
     public void login() {
         onStart();
         LoginBean bean = new LoginBean();
-        bean.phone = "1";
-        bean.password="1";
+        bean.phone = "。";
+        bean.password=".";
         mCompositeSubscription.add(manager.login(bean)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())

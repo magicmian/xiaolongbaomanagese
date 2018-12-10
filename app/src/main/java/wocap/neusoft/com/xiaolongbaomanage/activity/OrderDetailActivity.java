@@ -11,6 +11,7 @@ import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -18,6 +19,7 @@ import android.widget.TextView;
 import com.nightonke.boommenu.BoomButtons.HamButton;
 import com.nightonke.boommenu.BoomButtons.OnBMClickListener;
 import com.nightonke.boommenu.BoomMenuButton;
+import com.wang.avi.AVLoadingIndicatorView;
 
 import java.text.ParseException;
 import java.util.ArrayList;
@@ -33,7 +35,6 @@ import wocap.neusoft.com.xiaolongbaomanage.bean.BaseResponse;
 import wocap.neusoft.com.xiaolongbaomanage.bean.ContactsBean;
 import wocap.neusoft.com.xiaolongbaomanage.bean.ResSearchOrder;
 import wocap.neusoft.com.xiaolongbaomanage.bean.UpdateOrder;
-import wocap.neusoft.com.xiaolongbaomanage.customeView.BottomDialog;
 import wocap.neusoft.com.xiaolongbaomanage.customeView.BottomItem;
 import wocap.neusoft.com.xiaolongbaomanage.customeView.HorizontalDividerItemDecoration;
 import wocap.neusoft.com.xiaolongbaomanage.http.Constants;
@@ -72,6 +73,8 @@ public class OrderDetailActivity extends BaseActivity {
     ImageView copy;
     @BindView(R.id.bmb)
     BoomMenuButton bmb;
+    @BindView(R.id.avi)
+    AVLoadingIndicatorView avi;
     private ResSearchOrder order;
     CustomAdapter<ContactsBean> adapter;
     private NormalView<BaseResponse> resultView;
@@ -85,23 +88,23 @@ public class OrderDetailActivity extends BaseActivity {
     @Override
     protected void initView() {
         order = getIntent().getParcelableExtra("order");
-        adapter = new CustomAdapter<ContactsBean>(OrderDetailActivity.this,R.layout.layout_customer_item) {
+        adapter = new CustomAdapter<ContactsBean>(OrderDetailActivity.this, R.layout.layout_customer_item) {
             @Override
             protected void convert(CustomViewHolder holder, int position) throws ParseException {
                 final ContactsBean item = (ContactsBean) holder.tag;
-                holder.setText(R.id.name,item.getName());
-                holder.setText(R.id.id_no,item.getIdNumber());
-                holder.setText(R.id.type,Constants.CUstomerType.codeOf(item.getUserTyp()).getValue());
-                holder.setText(R.id.id_type,Constants.CardTypeEnum.codeOf(item.getIdType()).getValue());
-                if(item.getUserTyp() == 2){
-                    holder.setVisible(R.id.school_option,true);
-                    holder.setText(R.id.school_time,item.getSchoolTime());
-                    holder.setText(R.id.school_name,item.getSchoolName());
-                    holder.setText(R.id.school_id,item.getSchoolId());
-                    holder.setText(R.id.school_startstation,item.getSchoolStartStation());
-                    holder.setText(R.id.school_endstation,item.getSchoolEndStation());
-                }else{
-                    holder.setVisible(R.id.school_option,false);
+                holder.setText(R.id.name, item.getName());
+                holder.setText(R.id.id_no, item.getIdNumber());
+                holder.setText(R.id.type, Constants.CUstomerType.codeOf(item.getUserTyp()).getValue());
+                holder.setText(R.id.id_type, Constants.CardTypeEnum.codeOf(item.getIdType()).getValue());
+                if (item.getUserTyp() == 2) {
+                    holder.setVisible(R.id.school_option, true);
+                    holder.setText(R.id.school_time, item.getSchoolTime());
+                    holder.setText(R.id.school_name, item.getSchoolName());
+                    holder.setText(R.id.school_id, item.getSchoolId());
+                    holder.setText(R.id.school_startstation, item.getSchoolStartStation());
+                    holder.setText(R.id.school_endstation, item.getSchoolEndStation());
+                } else {
+                    holder.setVisible(R.id.school_option, false);
                 }
             }
         };
@@ -115,21 +118,23 @@ public class OrderDetailActivity extends BaseActivity {
         resultView = new NormalView<BaseResponse>() {
             @Override
             public void onSuccess(BaseResponse object) {
-                if(object.status ==200){
-                    AndroidTool.showToast(OrderDetailActivity.this,"订单状态更新成功");
-                }else{
-                    AndroidTool.showToast(OrderDetailActivity.this,object.msg);
+                stopAnim();
+                if (object.status == 200) {
+                    AndroidTool.showToast(OrderDetailActivity.this, "订单状态更新成功");
+                } else {
+                    AndroidTool.showToast(OrderDetailActivity.this, object.msg);
                 }
             }
 
             @Override
             public void onError(String result) {
-                AndroidTool.showToast(OrderDetailActivity.this,result);
+                AndroidTool.showToast(OrderDetailActivity.this, result);
+                stopAnim();
             }
 
             @Override
             public void onStart() {
-
+                startAnim();
             }
 
             @Override
@@ -151,7 +156,7 @@ public class OrderDetailActivity extends BaseActivity {
     private void setInfo() {
         tvStartStation.setText(order.getStartStation());
         tvEndStation.setText(order.getEndStation());
-        tvOrderid.setText(order.getOrderNo()+"");
+        tvOrderid.setText(order.getOrderNo() + "");
         tvPhone.setText(order.getPhone());
         remark.setText(order.getRemark());
         tvSeat.setText(Constants.SeatEnum.codeOf(order.getSeat()).getValue());
@@ -161,20 +166,20 @@ public class OrderDetailActivity extends BaseActivity {
     }
 
     @OnClick(R.id.tv_phone)
-    public void call(){
+    public void call() {
         diallPhone(order.getPhone());
     }
 
     @OnClick(R.id.copy)
-    public void copy(){
+    public void copy() {
         String msg = "";
-        for(ContactsBean constants:order.getContacts()){
-            msg+=constants.getName()+"----"+constants.getIdNumber()+"\n";
+        for (ContactsBean constants : order.getContacts()) {
+            msg += constants.getName() + "----" + constants.getIdNumber() + "\n";
         }
         ClipboardManager cm = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
         // 将文本内容放到系统剪贴板里。
         cm.setText(msg);
-        AndroidTool.showToast(OrderDetailActivity.this,"复制成功");
+        AndroidTool.showToast(OrderDetailActivity.this, "复制成功");
     }
 
 
@@ -220,10 +225,9 @@ public class OrderDetailActivity extends BaseActivity {
     }
 
 
-
     @OnClick(R.id.btn_login)
-    public void changeType(){
-       bmb.boom();
+    public void changeType() {
+        bmb.boom();
     }
 
     public void diallPhone(String phoneNum) {
@@ -232,7 +236,15 @@ public class OrderDetailActivity extends BaseActivity {
         intent.setData(data);
         startActivity(intent);
     }
+    void startAnim(){
+        avi.setVisibility(View.VISIBLE);
+        avi.smoothToShow();
+        // or avi.smoothToShow();
+    }
 
-
-
+    void stopAnim(){
+        avi.smoothToHide();
+        avi.setVisibility(View.GONE);
+        // or avi.smoothToHide();
+    }
 }

@@ -12,6 +12,8 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
 
+import com.wang.avi.AVLoadingIndicatorView;
+
 import java.text.ParseException;
 import java.util.ArrayList;
 
@@ -33,6 +35,7 @@ import wocap.neusoft.com.xiaolongbaomanage.http.Constants;
 import wocap.neusoft.com.xiaolongbaomanage.presenter.pView.NormalView;
 import wocap.neusoft.com.xiaolongbaomanage.presenter.searchOrderPresenter;
 import wocap.neusoft.com.xiaolongbaomanage.util.AndroidTool;
+import wocap.neusoft.com.xiaolongbaomanage.util.KeyboardUtils;
 import wocap.neusoft.com.xiaolongbaomanage.util.SharePrefUtil;
 
 /**
@@ -46,6 +49,8 @@ public class SearchFragment extends BaseFragment {
     RecyclerView recycleView;
     @BindView(R.id.search)
     ImageView search;
+    @BindView(R.id.avi)
+    AVLoadingIndicatorView avi;
     private NormalView<BaseResponse<ArrayList<ResSearchOrder>>> resultView;
     CustomAdapter<ResSearchOrder> adapter;
     private searchOrderPresenter searchOrderPresenter;
@@ -90,7 +95,7 @@ public class SearchFragment extends BaseFragment {
         Paint paint = new Paint();
         paint.setStrokeWidth(2);
         paint.setColor(getResources().getColor(R.color.line_color));
-        recycleView.addItemDecoration(new HorizontalDividerItemDecoration.Builder(getActivity()).margin(0, 0).paint(paint).build());
+        //recycleView.addItemDecoration(new HorizontalDividerItemDecoration.Builder(getActivity()).margin(0, 0).paint(paint).build());
         recycleView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recycleView.setHasFixedSize(true);
         recycleView.setAdapter(adapter);
@@ -99,6 +104,7 @@ public class SearchFragment extends BaseFragment {
         resultView = new NormalView<BaseResponse<ArrayList<ResSearchOrder>>>() {
             @Override
             public void onSuccess(BaseResponse<ArrayList<ResSearchOrder>> object) {
+                stopAnim();
                 if (object.status == 200) {
                     adapter.replaceAllData(object.data);
                 } else {
@@ -109,12 +115,13 @@ public class SearchFragment extends BaseFragment {
 
             @Override
             public void onError(String result) {
+                stopAnim();
                 AndroidTool.showToast(getActivity(), result);
             }
 
             @Override
             public void onStart() {
-
+                startAnim();
             }
 
             @Override
@@ -136,6 +143,7 @@ public class SearchFragment extends BaseFragment {
         if(TextUtils.isEmpty(name.getText().toString().trim())){
             AndroidTool.showToast(getActivity(),"请输入姓名");
         }else{
+            KeyboardUtils.hideSoftInput(getActivity());
             getOrder();
         }
 
@@ -148,7 +156,17 @@ public class SearchFragment extends BaseFragment {
         getOrder.setStatus(10);
         searchOrderPresenter.searchOrder(getOrder);
     }
+    void startAnim(){
+        avi.setVisibility(View.VISIBLE);
+        avi.smoothToShow();
+        // or avi.smoothToShow();
+    }
 
+    void stopAnim(){
+        avi.smoothToHide();
+        avi.setVisibility(View.GONE);
+        // or avi.smoothToHide();
+    }
 
 
 }

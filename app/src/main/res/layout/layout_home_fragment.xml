@@ -52,8 +52,8 @@
                     android:layout_gravity="center"
                     android:layout_height="24dp"
                     app:bmb_buttonEnum="ham"
-                    app:bmb_piecePlaceEnum="piecePlace_ham_5"
-                    app:bmb_buttonPlaceEnum="buttonPlace_ham_5"
+                    app:bmb_piecePlaceEnum="piecePlace_ham_6"
+                    app:bmb_buttonPlaceEnum="buttonPlace_ham_6"
                     />
                 <ImageView
                     android:layout_width="wrap_content"
@@ -61,7 +61,7 @@
                     android:layout_gravity="center"
                     android:clickable="false"
                     android:focusableInTouchMode="false"
-                    android:src="@drawable/ic_list"/>
+                    app:srcCompat="@drawable/ic_list"/>
             </FrameLayout>
 
 
@@ -74,7 +74,7 @@
         android:id="@+id/ptr_classic_frame_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#FFFFFF"
+        android:background="@color/app_bg"
         android:layout_marginTop="@dimen/_5dp"
         app:ptr_duration_to_back_refresh="200"
         app:ptr_duration_to_close_footer="1000"

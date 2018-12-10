@@ -53,4 +53,5 @@ dependencies {
     implementation 'com.nightonke:boommenu:2.1.1'
     // 此处以JPush 3.1.1 版本为例。
     implementation 'cn.jiguang.sdk:jcore:1.1.9'
+    implementation 'com.wang.avi:library:2.1.3'
 }

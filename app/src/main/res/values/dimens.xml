@@ -7,7 +7,7 @@
     <dimen name="toolbar_padding_top">0dp</dimen>
     <dimen name="font_normal">12sp</dimen>
     <dimen name="font_middle">14sp</dimen>
-    <dimen name="font_big">18sp</dimen>
+    <dimen name="font_big">15sp</dimen>
     <dimen name="font_super_big">22sp</dimen>
 
     <dimen name="avatarSize">50dp</dimen>
